@@ -43,12 +43,22 @@ function SaveContent(name) {
   localStorage.setItem(name, JSON.stringify(chat));
 }
 
+function formatCreaDate(d) {
+  const dd = d.getDate();
+  const mm = (d.getMonth() + 101).toString().substring(1, 3);
+  const hh = d.getHours();
+  const minutes = d.getMinutes();
+  // console.log(mm);
+  // eslint-disable-next-line prefer-template
+  return [d.getFullYear(), mm, dd < 10 ? `0${dd}` : dd].join('-') + ` ${hh}:${minutes}`;
+}
+
 function RefillListTbody() {
   MZtbody.innerHTML = '';
 
   for (const el of chat) {
     // eslint-disable-next-line no-undef
-    const time = moment(el.created).format('YYYY-MM-DD HH:mm');
+    const time = formatCreaDate(new Date(el.created));
     const NewMess = document.createElement('div');
     MZtbody.appendChild(NewMess);
     if (el.user === CurrentUser) {
