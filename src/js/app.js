@@ -13,7 +13,7 @@ const DispUser = document.querySelector('#disp-user');
 const MZtbody = document.querySelector('#mz_tbody');
 const ChatClearButton = document.querySelector('#chat-clear');
 
-const ws = new WebSocket('ws://anikolaevski-ahj10-ws.herokuapp.com/ws');
+const ws = new WebSocket('wss://anikolaevski-ahj10-ws.herokuapp.com/ws');
 // const ws = new WebSocket('ws://localhost:7070/ws');
 ws.binaryType = 'blob'; // arraybuffer
 
