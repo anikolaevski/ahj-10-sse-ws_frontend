@@ -1,5 +1,5 @@
 /* eslint-disable no-plusplus */
-const { Message } = require('./message.js');
+import Message from './message';
 
 let CurrentUser;
 const users = [];

@@ -1,4 +1,4 @@
-class Message {
+export default class Message {
   constructor(obj) {
     this.id = (obj.id) ? obj.id : Math.random().toString(16).slice(2);
     this.created = (obj.created) ? obj.created : new Date();
@@ -17,6 +17,3 @@ class Message {
   }
 }
 
-module.exports = {
-  Message,
-};
