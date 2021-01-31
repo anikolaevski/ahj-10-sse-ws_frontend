@@ -98,7 +98,7 @@ ws.addEventListener('open', () => {
   // After this we can send messages
   const x = () => { outMessage('hello!', 'handshake'); };
   x();
-  setInterval(x, (30000 + (Math.random() * 10) - 5)); // бомбимся на сервер, т.к. он рубит коннект
+  setInterval(x, (20000 + (Math.random() * 10) - 5)); // бомбимся на сервер, т.к. он рубит коннект
 });
 
 ws.addEventListener('close', (evt) => {
