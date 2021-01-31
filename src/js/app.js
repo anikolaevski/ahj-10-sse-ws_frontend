@@ -116,6 +116,15 @@ ws.addEventListener('error', () => {
   console.log('error');
 });
 
+// Show Chat UI elements
+function startUI4chat() {
+  loginForm.classList.add('nodisp');
+  LoadContent(`Chat${CurrentUser}`);
+  chatTemplate.classList.remove('nodisp');
+  DispUser.classList.remove('nodisp');
+  MZtbody.classList.remove('nodisp');
+}
+
 function inMessage(data) {
   if (!data.includes('{')) { return; }
   const mess = JSON.parse(data);
@@ -181,14 +190,6 @@ function requestUser() {
     if (!loginForm) { return; }
     loginForm.classList.remove('nodisp');
   }
-}
-
-function startUI4chat() {
-  loginForm.classList.add('nodisp');
-  LoadContent(`Chat${CurrentUser}`);
-  chatTemplate.classList.remove('nodisp');
-  DispUser.classList.remove('nodisp');
-  MZtbody.classList.remove('nodisp');
 }
 
 function submitLogin(evt) {
