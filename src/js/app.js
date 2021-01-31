@@ -135,6 +135,7 @@ function inMessage(data) {
 
   if (mess.typ === 'userReject' && mess.user === CurrentUser) {
     WorkStatus = 'off';
+    // eslint-disable-next-line no-alert
     window.alert(`Пользователь "${CurrentUser}" уже существует! Зайдите под другим именем.`);
   } else if ((mess.typ === 'newUser' && WorkStatus === 'on')
   || (mess.typ === 'userAccept' && mess.user === CurrentUser)) {
