@@ -1,6 +1,7 @@
 /* eslint-disable no-plusplus */
 import Message from './message';
 
+let WorkStatus = 'off';
 let CurrentUser;
 const users = [];
 const chat = [];
@@ -122,7 +123,13 @@ function inMessage(data) {
 
   if (!Object.keys(mess).includes('user')) { return; }
   // Разбор сообщения/пользователей
-  if (mess.typ === 'newUser') {
+
+  if (mess.typ === 'userReject' && mess.user === CurrentUser) {
+    WorkStatus = 'off';
+  } else if ((mess.typ === 'newUser' && WorkStatus === 'on')
+  || (mess.typ === 'userAccept' && mess.user === CurrentUser)) {
+    WorkStatus = 'on';
+    startUI4chat();
     for (const item of JSON.parse(mess.text)) {
       // console.log(item);
       if (!users.find((o) => o.name === item.name)) {
@@ -176,16 +183,19 @@ function requestUser() {
   }
 }
 
-function submitLogin(evt) {
-  evt.preventDefault();
-  const PopupFldName = document.querySelector('#popup_fld_name');
-  if (!PopupFldName) { return; }
-  CurrentUser = PopupFldName.value;
+function startUI4chat() {
   loginForm.classList.add('nodisp');
   LoadContent(`Chat${CurrentUser}`);
   chatTemplate.classList.remove('nodisp');
   DispUser.classList.remove('nodisp');
   MZtbody.classList.remove('nodisp');
+}
+
+function submitLogin(evt) {
+  evt.preventDefault();
+  const PopupFldName = document.querySelector('#popup_fld_name');
+  if (!PopupFldName) { return; }
+  CurrentUser = PopupFldName.value;
   outMessage(JSON.stringify([{
     name: CurrentUser,
     isMe: true,
@@ -196,6 +206,8 @@ function submitLogin(evt) {
     inMessage(ev.data);
     // console.log(evt.data);
   });
+
+  // startUI4chat();
 }
 
 function submitMessage(evt) {
