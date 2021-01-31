@@ -118,7 +118,7 @@ ws.addEventListener('error', () => {
 function inMessage(data) {
   if (!data.includes('{')) { return; }
   const mess = JSON.parse(data);
-  // console.log(mess);
+  console.log(mess);
 
   if (!Object.keys(mess).includes('user')) { return; }
   // Разбор сообщения/пользователей
