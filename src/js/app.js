@@ -139,8 +139,6 @@ function inMessage(data) {
     window.alert(`Пользователь "${CurrentUser}" уже существует! Зайдите под другим именем.`);
   } else if ((mess.typ === 'newUser' && WorkStatus === 'on')
   || (mess.typ === 'userAccept' && mess.user === CurrentUser)) {
-    WorkStatus = 'on';
-    startUI4chat();
     for (const item of JSON.parse(mess.text)) {
       // console.log(item);
       if (!users.find((o) => o.name === item.name)) {
@@ -148,6 +146,8 @@ function inMessage(data) {
           name: item.name,
           isMe: (item.name === CurrentUser),
         });
+        WorkStatus = 'on';
+        startUI4chat();
       }
     }
     chat.push({
