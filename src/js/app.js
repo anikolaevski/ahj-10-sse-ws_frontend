@@ -97,9 +97,6 @@ ws.addEventListener('open', () => {
   // eslint-disable-next-line no-console
   console.log('connected');
   // After this we can send messages
-  const x = () => { outMessage('hello!', 'handshake'); };
-  x();
-  setInterval(x, (20000 + (Math.random() * 10) - 5)); // бомбимся на сервер, т.к. он рубит коннект
 });
 
 ws.addEventListener('close', (evt) => {
@@ -116,13 +113,16 @@ ws.addEventListener('error', () => {
   console.log('error');
 });
 
-// Show Chat UI elements
+// Show Chat UI elements, start chat events
 function startUI4chat() {
   loginForm.classList.add('nodisp');
   LoadContent(`Chat${CurrentUser}`);
   chatTemplate.classList.remove('nodisp');
   DispUser.classList.remove('nodisp');
   MZtbody.classList.remove('nodisp');
+  const x = () => { outMessage('hello!', 'handshake'); };
+  x();
+  setInterval(x, (20000 + (Math.random() * 10) - 5)); // бомбимся на сервер, т.к. он рубит коннект
 }
 
 function inMessage(data) {
@@ -135,6 +135,7 @@ function inMessage(data) {
 
   if (mess.typ === 'userReject' && mess.user === CurrentUser) {
     WorkStatus = 'off';
+    window.alert(`Пользователь "${CurrentUser}" уже существует! Зайдите под другим именем.`);
   } else if ((mess.typ === 'newUser' && WorkStatus === 'on')
   || (mess.typ === 'userAccept' && mess.user === CurrentUser)) {
     WorkStatus = 'on';
